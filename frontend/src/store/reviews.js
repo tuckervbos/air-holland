@@ -41,6 +41,7 @@ const updateSpotDetails = (spotId, spotData) => ({
 
 //- thunks
 export const fetchSpotReviews = (spotId) => async (dispatch) => {
+	console.log("fetchSpotReviews called with spotId:", spotId);
 	const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
 	if (res.ok) {
 		const data = await res.json();
@@ -77,8 +78,14 @@ export const updateReview = (reviewId, reviewData) => async (dispatch) => {
 		return updatedReview;
 	}
 };
-
+// console.log("Spot ID before dispatching deleteReview:", spotId);
 export const deleteReview = (reviewId, spotId) => async (dispatch) => {
+	console.log(
+		"deleteReview called with reviewId:",
+		reviewId,
+		"spotId:",
+		spotId
+	);
 	const response = await csrfFetch(`/api/reviews/${reviewId}`, {
 		method: "DELETE",
 	});
